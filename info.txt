@@ -1,0 +1,49 @@
+Quanto maior o número de bits do ADC, melhor a quantização: mais binários
+para representar uma faixa de tensão, por exemplo.
+
+A resolução do ADC é a menor faixa possivel que se pode representar. Para o
+Atmega328P:
+
+Vrf/1023.0, onde Vrf é a tensão de referência.
+
+Para mapear entre escalas (binária e analógica):
+
+ADC = (Vin/Vrf)/2^n, pois Vrf é justamente o tamanho maximo da palavra 2^n.
+
+Registradores importantes:
+
+ADMUX
+
+BIT 7:6
+Configura qual tensão será usada como referência (interna ou externa).
+
+BIT 5
+Configura como o resultado da conversão vai ser guardado dentro dos dois
+registradores que servem para isso.
+
+BIT 3:0
+Configura o canal a ser usado, a fonte do sinal analogico que será convertido.
+
+ADCSRA
+
+BIT 7 - ENABLE/DISABLE ADC
+
+BIT 6 - INICIA CONEVERSÃO PARA O MODO SIMPLES
+
+BIT 5 - TRIGGER AUTOMATICO
+
+BIT 4 - FLAG DE INTERRUPCAO. QUANDO OCORRE VAI PARA 1.
+
+BIT 3 - BIT DE INTERRUPÇÃO PARA CONVERSAO FINALIZADA
+
+BIT 2:0 - PRESCALER E AJUSTE DE AMOSTRAGEM
+
+ADCL/ADCH
+Recebem o valor da conversão. No bit ADLAR setado para zero, temos a resultado
+guardado totalmente no ADCHL e o resto no ADCH
+
+ADCSRB
+Controla a fonte do autro trigger. Controla quando começa a conversão.
+
+DIDR
+Desabilita ou habilita o canal. Zero habilita o canal
